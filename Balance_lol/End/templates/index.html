@@ -1,0 +1,69 @@
+<body>
+    <div class="container">
+        <h1>Game Team Composition</h1>
+
+        <!-- 입력창 추가 -->
+        <form id="player-form" action="/generate_teams" method="post">
+            <label for="players">Enter Player Names (comma separated):</label>
+            <input type="text" id="players" name="players" required>
+            <button type="submit">Generate Teams</button>
+        </form>
+
+        <!-- 팀 결과 표시 -->
+        {% if team_a and team_b %}
+        <div class="team">
+            <h2>Team A</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Nickname</th>
+                        <th>Position</th>
+                        <th>Win Rate</th>
+                        <th>Rank Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in team_a['players'] %}
+                    <tr>
+                        <td>{{ player.name }}</td>
+                        <td>{{ player.nickname }}</td>
+                        <td>{{ player.main_position }}</td>
+                        <td>{{ player.win_rate }}%</td>
+                        <td>{{ player.rank_score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="team">
+            <h2>Team B</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Nickname</th>
+                        <th>Position</th>
+                        <th>Win Rate</th>
+                        <th>Rank Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for player in team_b['players'] %}
+                    <tr>
+                        <td>{{ player.name }}</td>
+                        <td>{{ player.nickname }}</td>
+                        <td>{{ player.main_position }}</td>
+                        <td>{{ player.win_rate }}%</td>
+                        <td>{{ player.rank_score }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <p class="score">Total Score: Team A {{ team_a['total_score'] }} vs Team B {{ team_b['total_score'] }}</p>
+        {% endif %}
+    </div>
+</body>
